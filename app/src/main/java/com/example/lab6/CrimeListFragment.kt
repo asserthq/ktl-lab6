@@ -22,14 +22,16 @@ class CrimeListFragment : Fragment() {
     private val crimeListViewModel: CrimeListViewModel by lazy {
         ViewModelProviders.of(this)[CrimeListViewModel::class.java]
     }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d(TAG, "Total crimes: ${crimeListViewModel.crimes.size}")
-    }
+
     companion object {
         fun newInstance(): CrimeListFragment {
             return CrimeListFragment()
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d(TAG, "Total crimes: ${crimeListViewModel.crimes.size}")
     }
 
     override fun onCreateView(
@@ -40,6 +42,7 @@ class CrimeListFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_crime_list, container, false)
         crimeRecyclerView = view.findViewById(R.id.crime_recycler_view)
         crimeRecyclerView.layoutManager = LinearLayoutManager(context)
+        updateUI()
         return view
     }
 
